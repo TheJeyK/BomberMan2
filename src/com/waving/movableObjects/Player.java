@@ -86,8 +86,6 @@ public class Player implements KeyListener {
      */
     public Player() {
         pos = new Vector2F(Main.width/2 - width/2, Main.height/2 - height/2);
-        hudManager = new HUDmanager(this);
-        guiManager = new GUImanager();
 
     }
 
@@ -97,6 +95,8 @@ public class Player implements KeyListener {
 
     public void init(World world) {
 
+        hudManager = new HUDmanager(this);
+        guiManager = new GUImanager();
         this.world = world;
 
         render = new Rectangle((int)(pos.xPos - pos.getWorldLocation().xPos + pos.xPos - renderDistanceWidth *32/2 + width/2),
@@ -227,10 +227,10 @@ public class Player implements KeyListener {
 
     public void moveMapUp(float speed) {
         if (!Check.CollisionPlayerBlock(
-                new Point((int)(pos.xPos + GameLoop.map.xPos),
-                        (int)(pos.yPos + GameLoop.map.yPos - speed)),
-                new Point((int)(pos.xPos + GameLoop.map.xPos + width),
-                        (int)(pos.yPos + GameLoop.map.yPos - speed)))) {
+                new Point((int)(pos.xPos + World.map_pos.xPos),
+                        (int)(pos.yPos + World.map_pos.yPos - speed)),
+                new Point((int)(pos.xPos + World.map_pos.xPos + width),
+                        (int)(pos.yPos + World.map_pos.yPos - speed)))) {
 
             if (speedUp < maxSpeed) {
                 speedUp += slowDown;
@@ -238,7 +238,7 @@ public class Player implements KeyListener {
                 speedUp = maxSpeed;
             }
 
-            GameLoop.map.yPos -= speed;
+            World.map_pos.yPos -= speed;
         } else {
             speedUp = 0;
         }
@@ -246,10 +246,10 @@ public class Player implements KeyListener {
 
     public void moveMapUpRun(float speed) {
         if (!Check.CollisionPlayerBlock(
-                new Point((int)(pos.xPos + GameLoop.map.xPos),
-                        (int)(pos.yPos + GameLoop.map.yPos - speed)),
-                new Point((int)(pos.xPos + GameLoop.map.xPos + width),
-                        (int)(pos.yPos + GameLoop.map.yPos - speed)))) {
+                new Point((int)(pos.xPos + World.map_pos.xPos),
+                        (int)(pos.yPos + World.map_pos.yPos - speed)),
+                new Point((int)(pos.xPos + World.map_pos.xPos + width),
+                        (int)(pos.yPos + World.map_pos.yPos - speed)))) {
 
             if (speedUp < runSpeed) {
                 speedUp += slowDown;
@@ -257,7 +257,7 @@ public class Player implements KeyListener {
                 speedUp = runSpeed;
             }
 
-            GameLoop.map.yPos -= speed;
+            World.map_pos.yPos -= speed;
         } else {
             speedUp = 0;
         }
@@ -265,10 +265,10 @@ public class Player implements KeyListener {
 
     public void moveMapUpGlide(float speed) {
         if (!Check.CollisionPlayerBlock(
-                new Point((int)(pos.xPos + GameLoop.map.xPos),
-                        (int)(pos.yPos + GameLoop.map.yPos - speed)),
-                new Point((int)(pos.xPos + GameLoop.map.xPos + width),
-                        (int)(pos.yPos + GameLoop.map.yPos - speed)))) {
+                new Point((int)(pos.xPos + World.map_pos.xPos),
+                        (int)(pos.yPos + World.map_pos.yPos - speed)),
+                new Point((int)(pos.xPos + World.map_pos.xPos + width),
+                        (int)(pos.yPos + World.map_pos.yPos - speed)))) {
 
             if (speedUp != 0) {
                 speedUp -= slowDown;
@@ -276,7 +276,7 @@ public class Player implements KeyListener {
                     speedUp = 0;
                 }
             }
-            GameLoop.map.yPos -= speed;
+            World.map_pos.yPos -= speed;
         } else {
             speedUp = 0;
         }
@@ -284,10 +284,10 @@ public class Player implements KeyListener {
 
     public void moveMapDown(float speed) {
         if (!Check.CollisionPlayerBlock(
-                new Point((int)(pos.xPos + GameLoop.map.xPos),
-                        (int)(pos.yPos + GameLoop.map.yPos + height + speed)),
-                new Point((int)(pos.xPos + GameLoop.map.xPos + width),
-                        (int)(pos.yPos + GameLoop.map.yPos + height + speed)))) {
+                new Point((int)(pos.xPos + World.map_pos.xPos),
+                        (int)(pos.yPos + World.map_pos.yPos + height + speed)),
+                new Point((int)(pos.xPos + World.map_pos.xPos + width),
+                        (int)(pos.yPos + World.map_pos.yPos + height + speed)))) {
 
             if (speedDown < maxSpeed) {
                 speedDown += slowDown;
@@ -295,7 +295,7 @@ public class Player implements KeyListener {
                 speedDown = maxSpeed;
             }
 
-            GameLoop.map.yPos += speed;
+            World.map_pos.yPos += speed;
         } else {
             speedDown = 0;
         }
@@ -303,10 +303,10 @@ public class Player implements KeyListener {
 
     public void moveMapDownRun(float speed) {
         if (!Check.CollisionPlayerBlock(
-                new Point((int)(pos.xPos + GameLoop.map.xPos),
-                        (int)(pos.yPos + GameLoop.map.yPos + height + speed)),
-                new Point((int)(pos.xPos + GameLoop.map.xPos + width),
-                        (int)(pos.yPos + GameLoop.map.yPos + height + speed)))) {
+                new Point((int)(pos.xPos + World.map_pos.xPos),
+                        (int)(pos.yPos + World.map_pos.yPos + height + speed)),
+                new Point((int)(pos.xPos + World.map_pos.xPos + width),
+                        (int)(pos.yPos + World.map_pos.yPos + height + speed)))) {
 
             if (speedDown < runSpeed) {
                 speedDown += slowDown;
@@ -314,7 +314,7 @@ public class Player implements KeyListener {
                 speedDown = runSpeed;
             }
 
-            GameLoop.map.yPos += speed;
+            World.map_pos.yPos += speed;
         } else {
             speedDown = 0;
         }
@@ -322,10 +322,10 @@ public class Player implements KeyListener {
 
     public void moveMapDownGlide(float speed) {
         if (!Check.CollisionPlayerBlock(
-                new Point((int)(pos.xPos + GameLoop.map.xPos),
-                        (int)(pos.yPos + GameLoop.map.yPos + height + speed)),
-                new Point((int)(pos.xPos + GameLoop.map.xPos + width),
-                        (int)(pos.yPos + GameLoop.map.yPos + height + speed)))) {
+                new Point((int)(pos.xPos + World.map_pos.xPos),
+                        (int)(pos.yPos + World.map_pos.yPos + height + speed)),
+                new Point((int)(pos.xPos + World.map_pos.xPos + width),
+                        (int)(pos.yPos + World.map_pos.yPos + height + speed)))) {
 
             if (speedDown != 0) {
                 speedDown -= slowDown;
@@ -333,7 +333,7 @@ public class Player implements KeyListener {
                     speedDown = 0;
                 }
             }
-            GameLoop.map.yPos += speed;
+            World.map_pos.yPos += speed;
         } else {
             speedDown = 0;
         }
@@ -343,10 +343,10 @@ public class Player implements KeyListener {
 
 
         if (!Check.CollisionPlayerBlock(
-                new Point((int) (pos.xPos + GameLoop.map.xPos + width + speed),
-                        (int) (pos.yPos + GameLoop.map.yPos)),
-                new Point((int) (pos.xPos + GameLoop.map.xPos + width + speed),
-                        (int) (pos.yPos + GameLoop.map.yPos + height)))) {
+                new Point((int) (pos.xPos + World.map_pos.xPos + width + speed),
+                        (int) (pos.yPos + World.map_pos.yPos)),
+                new Point((int) (pos.xPos + World.map_pos.xPos + width + speed),
+                        (int) (pos.yPos + World.map_pos.yPos + height)))) {
 
             if (speedRight < maxSpeed) {
                 speedRight += slowDown;
@@ -354,7 +354,7 @@ public class Player implements KeyListener {
                 speedRight = maxSpeed;
             }
 
-            GameLoop.map.xPos += speed;
+            World.map_pos.xPos += speed;
         } else {
             speedRight = 0;
         }
@@ -364,10 +364,10 @@ public class Player implements KeyListener {
 
 
         if (!Check.CollisionPlayerBlock(
-                new Point((int) (pos.xPos + GameLoop.map.xPos + width + speed),
-                        (int) (pos.yPos + GameLoop.map.yPos)),
-                new Point((int) (pos.xPos + GameLoop.map.xPos + width + speed),
-                        (int) (pos.yPos + GameLoop.map.yPos + height)))) {
+                new Point((int) (pos.xPos + World.map_pos.xPos + width + speed),
+                        (int) (pos.yPos + World.map_pos.yPos)),
+                new Point((int) (pos.xPos + World.map_pos.xPos + width + speed),
+                        (int) (pos.yPos + World.map_pos.yPos + height)))) {
 
             if (speedRight < runSpeed) {
                 speedRight += slowDown;
@@ -375,7 +375,7 @@ public class Player implements KeyListener {
                 speedRight = runSpeed;
             }
 
-            GameLoop.map.xPos += speed;
+            World.map_pos.xPos += speed;
         } else {
             speedRight = 0;
         }
@@ -384,10 +384,10 @@ public class Player implements KeyListener {
     public void moveMapRightGlide(float speed) {
 
         if (!Check.CollisionPlayerBlock(
-                new Point((int)(pos.xPos + GameLoop.map.xPos + width + speed),
-                        (int)(pos.yPos + GameLoop.map.yPos)),
-                new Point((int)(pos.xPos + GameLoop.map.xPos + width + speed),
-                        (int)(pos.yPos + GameLoop.map.yPos + height)))) {
+                new Point((int)(pos.xPos + World.map_pos.xPos + width + speed),
+                        (int)(pos.yPos + World.map_pos.yPos)),
+                new Point((int)(pos.xPos + World.map_pos.xPos + width + speed),
+                        (int)(pos.yPos + World.map_pos.yPos + height)))) {
 
             if (speedRight != 0) {
                 speedRight -= slowDown;
@@ -395,7 +395,7 @@ public class Player implements KeyListener {
                     speedRight = 0;
                 }
             }
-            GameLoop.map.xPos += speed;
+            World.map_pos.xPos += speed;
         } else {
             speedRight = 0;
         }
@@ -404,10 +404,10 @@ public class Player implements KeyListener {
 
     public void moveMapLeft(float speed) {
         if (!Check.CollisionPlayerBlock(
-                new Point((int)(pos.xPos + GameLoop.map.xPos - speed),
-                        (int)(pos.yPos + GameLoop.map.yPos + height)),
-                new Point((int)(pos.xPos + GameLoop.map.xPos - speed),
-                        (int)(pos.yPos + GameLoop.map.yPos)))) {
+                new Point((int)(pos.xPos + World.map_pos.xPos - speed),
+                        (int)(pos.yPos + World.map_pos.yPos + height)),
+                new Point((int)(pos.xPos + World.map_pos.xPos - speed),
+                        (int)(pos.yPos + World.map_pos.yPos)))) {
 
             if (speedLeft < maxSpeed) {
                 speedLeft += slowDown;
@@ -415,7 +415,7 @@ public class Player implements KeyListener {
                 speedLeft = maxSpeed;
             }
 
-            GameLoop.map.xPos -= speed;
+            World.map_pos.xPos -= speed;
         } else {
             speedLeft = 0;
         }
@@ -423,10 +423,10 @@ public class Player implements KeyListener {
 
     public void moveMapLeftRun(float speed) {
         if (!Check.CollisionPlayerBlock(
-                new Point((int)(pos.xPos + GameLoop.map.xPos - speed),
-                        (int)(pos.yPos + GameLoop.map.yPos + height)),
-                new Point((int)(pos.xPos + GameLoop.map.xPos - speed),
-                        (int)(pos.yPos + GameLoop.map.yPos)))) {
+                new Point((int)(pos.xPos + World.map_pos.xPos - speed),
+                        (int)(pos.yPos + World.map_pos.yPos + height)),
+                new Point((int)(pos.xPos + World.map_pos.xPos - speed),
+                        (int)(pos.yPos + World.map_pos.yPos)))) {
 
             if (speedLeft < runSpeed) {
                 speedLeft += slowDown;
@@ -434,7 +434,7 @@ public class Player implements KeyListener {
                 speedLeft = runSpeed;
             }
 
-            GameLoop.map.xPos -= speed;
+            World.map_pos.xPos -= speed;
         } else {
             speedLeft = 0;
         }
@@ -442,10 +442,10 @@ public class Player implements KeyListener {
 
     public void moveMapLeftGlide(float speed) {
         if (!Check.CollisionPlayerBlock(
-                new Point((int)(pos.xPos + GameLoop.map.xPos - speed),
-                        (int)(pos.yPos + GameLoop.map.yPos + height)),
-                new Point((int)(pos.xPos + GameLoop.map.xPos - speed),
-                        (int)(pos.yPos + GameLoop.map.yPos)))) {
+                new Point((int)(pos.xPos + World.map_pos.xPos - speed),
+                        (int)(pos.yPos + World.map_pos.yPos + height)),
+                new Point((int)(pos.xPos + World.map_pos.xPos - speed),
+                        (int)(pos.yPos + World.map_pos.yPos)))) {
 
             if (speedLeft != 0) {
                 speedLeft -= slowDown;
@@ -454,7 +454,7 @@ public class Player implements KeyListener {
                 }
             }
 
-            GameLoop.map.xPos -= speed;
+            World.map_pos.xPos -= speed;
         } else {
             speedLeft = 0;
         }

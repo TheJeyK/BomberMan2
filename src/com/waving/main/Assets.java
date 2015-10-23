@@ -37,10 +37,6 @@ public class Assets {
     public static BufferedImage ice_road_left_down;
     public static BufferedImage ice_road_up_right_down;
 
-    public static BufferedImage getButton_released() {
-        return button_released;
-    }
-
     public void init() {
         mouse.setSpriteSheet(loadImageFrom.LoadImageFrom(Main.class, "mouse_sprites.png"));
         blocks.setSpriteSheet(loadImageFrom.LoadImageFrom(Main.class, "sprites.png"));
@@ -54,8 +50,8 @@ public class Assets {
 
         //BUTTON
         button_released = button.getTile(0, 0, 21, 7);
-        button_pressed = button.getTile(0, 14, 21, 7);
         button_heldOver = button.getTile(0, 7, 21, 7);
+        button_pressed = button.getTile(0, 14, 21, 7);
 
         //MODIFICAR AL AÑADIR UN NUEVO BLOQUE
         stone_1 = blocks.getTile(0, 0, 16, 16);
@@ -77,6 +73,10 @@ public class Assets {
 
     public static BufferedImage getButton_pressed() {
         return button_pressed;
+    }
+
+    public static BufferedImage getButton_released() {
+        return button_released;
     }
 
     public static BufferedImage getMouse_pressed() {

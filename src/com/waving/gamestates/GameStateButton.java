@@ -5,6 +5,8 @@ import com.waving.managers.MouseManager;
 import my.project.gop.main.Vector2F;
 
 import java.awt.*;
+import java.awt.font.FontRenderContext;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 public class GameStateButton extends Rectangle{
@@ -13,8 +15,8 @@ public class GameStateButton extends Rectangle{
     private Vector2F pos = new Vector2F();
     private GameStateManager gsm;
     private boolean isHeldOver;
-    private int width = 32*3;
-    private int height = 32;
+    private int width = 40*3;
+    private int height = 40;
     private BufferedImage defaultImage;
     private String buttonMessage;
 
@@ -23,6 +25,14 @@ public class GameStateButton extends Rectangle{
         this.pos.yPos = ypos;
         this.gameState = gameState;
         this.gsm = gameStateManager;
+        this.buttonMessage = buttonMessage;
+        setBounds((int)pos.xPos, (int)pos.yPos, width, height);
+        defaultImage = Assets.getButton_released();
+    }
+
+    public GameStateButton(float xpos, float ypos, String buttonMessage) {
+        this.pos.xPos = xpos;
+        this.pos.yPos = ypos;
         this.buttonMessage = buttonMessage;
         setBounds((int)pos.xPos, (int)pos.yPos, width, height);
         defaultImage = Assets.getButton_released();
@@ -51,7 +61,9 @@ public class GameStateButton extends Rectangle{
 
         if (isHeldOver) {
 
-            if (defaultImage != Assets.getButton_heldOver()) {
+            if (isPressed() && defaultImage != Assets.getButton_pressed()) {
+                defaultImage = Assets.getButton_pressed();
+            } else if (defaultImage != Assets.getButton_heldOver()) {
                 defaultImage = Assets.getButton_heldOver();
             }
 
@@ -66,6 +78,7 @@ public class GameStateButton extends Rectangle{
             if (isHeldOver) {
                 if (isPressed()) {
                     gsm.states.push(gameState);
+                    gsm.states.peek().init();
                     isHeldOver = false;
                     MouseManager.isPressed(false);
                 }
@@ -73,12 +86,19 @@ public class GameStateButton extends Rectangle{
         }
     }
 
+    Font font = new Font("Serif", 10, 30);
+
     public void render(Graphics2D g) {
 
         g.drawImage(defaultImage, (int)pos.xPos, (int)pos.yPos, width, height, null);
 
+        g.setFont(font);
+        AffineTransform affineTransform = new AffineTransform();
+        FontRenderContext fontRenderContext = new FontRenderContext(affineTransform, true, true);
+        int tw = (int)font.getStringBounds(buttonMessage, fontRenderContext).getWidth();
+
         g.setColor(Color.BLUE);
-        g.drawString(buttonMessage, (int)pos.xPos+25, (int)pos.yPos+20);
+        g.drawString(buttonMessage, (int)pos.xPos+width/2 - tw/2, (int)pos.yPos+height/2 +8);
     }
 
     public boolean isHeldOver() {

@@ -9,7 +9,6 @@ public class GameLoop extends GOPGameLoop {
 
     GameStateManager gsm;
     public static Assets assets = new Assets();
-    public static Vector2F map = new Vector2F();
 
     public GameLoop(int width, int height) {
         super(width, height);
@@ -18,7 +17,6 @@ public class GameLoop extends GOPGameLoop {
     @Override
     public void init() {
         assets.init();
-        Vector2F.setWorldVariables(map.xPos, map.yPos);
         gsm = new GameStateManager();
         gsm.init();
         super.init();
@@ -26,7 +24,6 @@ public class GameLoop extends GOPGameLoop {
 
     @Override
     public void tick(double deltaTime) {
-        Vector2F.setWorldVariables(map.xPos, map.yPos);
         gsm.tick(deltaTime);
     }
 

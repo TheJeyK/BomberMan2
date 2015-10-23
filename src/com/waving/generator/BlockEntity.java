@@ -65,7 +65,7 @@ public class BlockEntity extends Rectangle{
                 }
 
                 if (lifeFade <= 0.02) {
-                    World.removeDroppedEntity(this);
+                    //World.removeDroppedEntity(this);
                     isAlive = false;
                 }
             }

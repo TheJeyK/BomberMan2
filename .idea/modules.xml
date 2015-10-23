@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../GameOperatingSystem/GameOperatingSystem.iml" filepath="$PROJECT_DIR$/../GameOperatingSystem/GameOperatingSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Unneeded Files/Unneeded Files.iml" filepath="$PROJECT_DIR$/../Unneeded Files/Unneeded Files.iml" />
       <module fileurl="file://$PROJECT_DIR$/Wave.iml" filepath="$PROJECT_DIR$/Wave.iml" />
     </modules>
   </component>

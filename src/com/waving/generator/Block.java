@@ -29,14 +29,15 @@ public class Block extends Rectangle{
         this.blockType = blockType;
 
         //MODIFICAR CUANDO SE AÑADA UN NUEVO BLOQUE SOLIDO
-        if (this.blockType == BlockType.WALL_1 || this.blockType == BlockType.ROOF_1 ||
+        this.isSolid = this.blockType == BlockType.WALL_1 || this.blockType == BlockType.ROOF_1 ||
                 this.blockType == BlockType.INTER_WALL_1 || this.blockType == BlockType.ICE_WALL_1 ||
-                this.blockType == BlockType.ICE_ROOF_1) {
-            this.isSolid = true;
-        } else {
-            this.isSolid = false;
-        }
+                this.blockType == BlockType.ICE_ROOF_1;
         init();
+    }
+
+    public Block(Vector2F pos) {
+        this.pos = pos;
+        area = new Rectangle((int)pos.xPos, (int)pos.yPos, blockSize, blockSize);
     }
 
     /**
@@ -108,7 +109,7 @@ public class Block extends Rectangle{
 
             Vector2F newpos = new Vector2F(xpos, ypos);
 
-            World.dropBlockEntity(newpos, block);
+            //World.dropBlockEntity(newpos, block);
 
             dropped = true;
         }
@@ -145,6 +146,10 @@ public class Block extends Rectangle{
 
     public Rectangle getArea() {
         return area;
+    }
+
+    public Vector2F getBlockLocation() {
+        return this.pos;
     }
 
     /**
