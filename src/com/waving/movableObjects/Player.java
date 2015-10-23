@@ -1,6 +1,5 @@
 package com.waving.movableObjects;
 
-import com.waving.gameloop.GameLoop;
 import com.waving.gamestates.GameStateButton;
 import com.waving.generator.World;
 import com.waving.main.Animator;
@@ -28,11 +27,10 @@ public class Player implements KeyListener {
     private int width = 50;
     private int height = 75;
     private static boolean up, down, left, right;
+    private static boolean debug = false;
     private static float runSpeed = 20F;
     private static float walkSpeed = 3F;
     private static float maxSpeed = 3F;
-    //private static long animationRunningSpeed = 100L;
-    //private static long animationWalkingSpeed = 300L;
     private static long animationSpeed = 300L;
     private float speedUp = 0;
     private float speedDown = 0;
@@ -95,7 +93,7 @@ public class Player implements KeyListener {
 
     public void init(World world) {
 
-        hudManager = new HUDmanager(this);
+        hudManager = new HUDmanager(world);
         guiManager = new GUImanager();
         this.world = world;
 
@@ -476,12 +474,8 @@ public class Player implements KeyListener {
         //UP
         if (animationState == 0) {
             g.drawImage(ani_Up.sprite, (int)pos.xPos, (int)pos.yPos, width, height, null);
-            if (up) {
-                /*if (running) {
-                    ani_Up.setSpeed(100);
-                } else {
-                    ani_Up.setSpeed(300);
-                }*/
+            if (up || speedUp != 0) {
+
                 ani_Up.update(System.currentTimeMillis());
             }
         }
@@ -489,12 +483,8 @@ public class Player implements KeyListener {
         //DOWN
         if (animationState == 1) {
             g.drawImage(ani_Down.sprite, (int)pos.xPos, (int)pos.yPos, width, height, null);
-            if (down) {
-                /*if (running) {
-                    ani_Down.setSpeed(100);
-                } else {
-                    ani_Down.setSpeed(300);
-                }*/
+            if (down || speedDown != 0) {
+
                 ani_Down.update(System.currentTimeMillis());
             }
         }
@@ -502,12 +492,8 @@ public class Player implements KeyListener {
         //RIGHT
         if (animationState == 2) {
             g.drawImage(ani_Right.sprite, (int)pos.xPos, (int)pos.yPos, width, height, null);
-            if (right) {
-                /*if (running) {
-                    ani_Right.setSpeed(100);
-                } else {
-                    ani_Right.setSpeed(300);
-                }*/
+            if (right || speedRight != 0) {
+
                 ani_Right.update(System.currentTimeMillis());
             }
         }
@@ -515,12 +501,8 @@ public class Player implements KeyListener {
         //LEFT
         if (animationState == 3) {
             g.drawImage(ani_Left.sprite, (int)pos.xPos, (int)pos.yPos, width, height, null);
-            if (left) {
-                /*if (running) {
-                    ani_Left.setSpeed(100);
-                } else {
-                    ani_Left.setSpeed(300);
-                }*/
+            if (left || speedLeft != 0) {
+
                 ani_Left.update(System.currentTimeMillis());
             }
         }
@@ -528,7 +510,7 @@ public class Player implements KeyListener {
         //IDLE
         if (animationState == 4) {
             g.drawImage(ani_Idle.sprite, (int)pos.xPos, (int)pos.yPos, width, height, null);
-            if (!left && !right && !down && !up) {
+            if (!left && !right && !down && !up && speedDown == 0 && speedUp == 0 && speedLeft == 0 && speedRight == 0) {
                 ani_Idle.update(System.currentTimeMillis());
             }
         }
@@ -570,6 +552,17 @@ public class Player implements KeyListener {
         if (key == KeyEvent.VK_ESCAPE) {
             System.exit(1);
         }
+        if (key == KeyEvent.VK_F3) {
+            if (!debug) {
+                debug = true;
+            } else {
+                debug = false;
+            }
+        }
+    }
+
+    public static boolean isDebugging() {
+        return debug;
     }
 
     @Override

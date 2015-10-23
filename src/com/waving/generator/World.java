@@ -21,7 +21,7 @@ public class World {
     private Player player;
 
     //LISTS
-    TileManager tiles;
+    public TileManager tiles;
 
     //WORLD SPAWN
     private Block spawn;
@@ -47,6 +47,7 @@ public class World {
     }
 
     public void tick(double deltaTime) {
+
         Vector2F.setWorldVariables(map_pos.xPos, map_pos.yPos);
 
         spawn.tick(deltaTime);
@@ -156,6 +157,10 @@ public class World {
         this.player = player;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
     public Vector2F getWorldPos() {
         return map_pos;
     }
@@ -178,5 +183,9 @@ public class World {
 
     public Vector2F getWorldSpawn() {
         return spawn.pos;
+    }
+
+    public TileManager getWorldBlocks() {
+        return tiles;
     }
 }

@@ -1,6 +1,9 @@
 package com.waving.managers;
 
 import com.waving.generator.Block;
+import com.waving.generator.TileManager;
+import com.waving.generator.World;
+import com.waving.main.Main;
 import com.waving.movableObjects.Player;
 import my.project.gop.main.Light;
 import my.project.gop.main.Vector2F;
@@ -11,7 +14,6 @@ import java.util.ArrayList;
 
 public class HUDmanager {
 
-    private Player player;
     private BufferedImage lightMap = new BufferedImage(100 * Block.blockSize, 100 * Block.blockSize,
             BufferedImage.TYPE_INT_ARGB);
 
@@ -19,8 +21,11 @@ public class HUDmanager {
 
     private Vector2F lightMapPos = new Vector2F();
 
-    public HUDmanager(Player player) {
-        this.player = player;
+    private World world;
+
+    public HUDmanager(World world) {
+        this.world = world;
+
         //addLights();
 
         //light = loadImageFrom.LoadImageFrom(Main.class, "light.png");
@@ -28,7 +33,7 @@ public class HUDmanager {
 
     private void addLights() {
 
-        lights.add(new Light(player.getPos().xPos, player.getPos().yPos, 100, 120));
+        lights.add(new Light(world.getPlayer().getPos().xPos, world.getPlayer().getPos().yPos, 100, 120));
     }
 
     public void updateLights() {
@@ -53,15 +58,22 @@ public class HUDmanager {
         /*updateLights();
 
         g.drawImage(lightMap, (int)lightMapPos.getWorldLocation().xPos, (int)lightMapPos.getWorldLocation().yPos, null);
+        */
 
-        /*g.setColor(Color.BLACK);
-        g.fillRect(0, 0, Main.width, Main.height/6);
-        g.fillRect(0,600, Main.width, Main.height/6);
-        g.fillRect(0, 0, Main.width/6, Main.height);
-        g.fillRect(1150, 0, Main.width/6, Main.height);
-        g.setColor(Color.WHITE);*/
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, Main.width, Main.height/10);
+        g.fillRect(0,630, Main.width, Main.height/10);
+        g.fillRect(0, 0, Main.width/10, Main.height);
+        g.fillRect(1250, 0, Main.width/10, Main.height);
+        g.setColor(Color.WHITE);
 
-        g.drawString(player.getPos().xPos+"", 200, 50);
         //g.drawImage(light, 0, 0, Main.width, Main.height, null);
+
+        if (Player.isDebugging()) {
+            g.drawString("[DEBUG]", 20, 20);
+            g.drawString("[MapXpos]" + world.getWorldXpos(), 20, 50);
+            g.drawString("[MapYpos]" + world.getWorldYpos(), 20, 80);
+            g.drawString("[LoadedBlocks]" + TileManager.getBlocks().size(), 20, 110);
+        }
     }
 }

@@ -30,4 +30,8 @@ public class TileManager {
             block.render(g);
         }
     }
+
+    public static ArrayList<Block> getBlocks() {
+        return blocks;
+    }
 }
