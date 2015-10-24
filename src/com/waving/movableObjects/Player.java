@@ -28,17 +28,17 @@ public class Player implements KeyListener {
     private int height = 75;
     private static boolean up, down, left, right;
     private static boolean debug = false;
-    private static float runSpeed = 20F;
-    private static float walkSpeed = 3F;
+    private static boolean spawned;
+    private final static float runSpeed = 6F;
+    private final static float walkSpeed = 3F;
     private static float maxSpeed = 3F;
     private static long animationSpeed = 300L;
     private float speedUp = 0;
     private float speedDown = 0;
     private float speedLeft = 0;
     private float speedRight = 0;
-    private float slowDown = 0.08F;
+    private float slowDown = 0.15F;
     private float fixDt = 52F/60F;
-
 
     GameStateButton button1 = new GameStateButton(200, 200);
     private BufferedImage button1DefaultImage;
@@ -156,6 +156,8 @@ public class Player implements KeyListener {
         ani_Idle = new Animator(listIdle);
         ani_Idle.setSpeed(800);
         ani_Idle.play();
+
+        spawned = true;
     }
 
     /**
@@ -234,25 +236,6 @@ public class Player implements KeyListener {
                 speedUp += slowDown;
             } else {
                 speedUp = maxSpeed;
-            }
-
-            World.map_pos.yPos -= speed;
-        } else {
-            speedUp = 0;
-        }
-    }
-
-    public void moveMapUpRun(float speed) {
-        if (!Check.CollisionPlayerBlock(
-                new Point((int)(pos.xPos + World.map_pos.xPos),
-                        (int)(pos.yPos + World.map_pos.yPos - speed)),
-                new Point((int)(pos.xPos + World.map_pos.xPos + width),
-                        (int)(pos.yPos + World.map_pos.yPos - speed)))) {
-
-            if (speedUp < runSpeed) {
-                speedUp += slowDown;
-            } else {
-                speedUp = runSpeed;
             }
 
             World.map_pos.yPos -= speed;
@@ -565,6 +548,10 @@ public class Player implements KeyListener {
         return debug;
     }
 
+    public boolean hasSpawned() {
+        return spawned;
+    }
+
     @Override
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
@@ -588,166 +575,4 @@ public class Player implements KeyListener {
         }
     }
 
-    /*                    public void playerMoveCode() {
-        if (up) {
-
-            if (!Check.CollisionPlayerBlock(
-                    new Point((int)(pos.xPos + GameLoop.map.xPos),
-                            (int)(pos.yPos + GameLoop.map.yPos - moveAmountUp)),
-                    new Point((int)(pos.xPos + GameLoop.map.xPos + width),
-                            (int)(pos.yPos + GameLoop.map.yPos - moveAmountUp)))) {
-
-                if (speedUp < maxSpeed) {
-                    speedUp += slowDown;
-                } else {
-                    speedUp = maxSpeed;
-                }
-
-                pos.yPos -= moveAmountUp;
-            } else {
-                speedUp = 0;
-            }
-
-        }else {
-
-            if (!Check.CollisionPlayerBlock(
-                    new Point((int)(pos.xPos + GameLoop.map.xPos),
-                            (int)(pos.yPos + GameLoop.map.yPos - moveAmountUp)),
-                    new Point((int)(pos.xPos + GameLoop.map.xPos + width),
-                            (int)(pos.yPos + GameLoop.map.yPos - moveAmountUp)))) {
-
-                if (speedUp != 0) {
-                    speedUp -= slowDown;
-
-                    if (speedUp < 0) {
-                        speedUp = 0;
-                    }
-                }
-                pos.yPos -= moveAmountUp;
-            }else {
-                speedUp =0;
-            }
-
-        }
-        if (down) {
-
-            if (!Check.CollisionPlayerBlock(
-                    new Point((int)(pos.xPos + GameLoop.map.xPos),
-                            (int)(pos.yPos + GameLoop.map.yPos + height + moveAmountDown)),
-                    new Point((int)(pos.xPos + GameLoop.map.xPos + width),
-                            (int)(pos.yPos + GameLoop.map.yPos + height + moveAmountDown)))) {
-
-                if (speedDown < maxSpeed) {
-                    speedDown += slowDown;
-                } else {
-                    speedDown = maxSpeed;
-                }
-
-                pos.yPos += moveAmountDown;
-            } else {
-                speedDown = 0;
-            }
-
-        }else {
-
-            if (!Check.CollisionPlayerBlock(
-                    new Point((int)(pos.xPos + GameLoop.map.xPos),
-                            (int)(pos.yPos + GameLoop.map.yPos + height + moveAmountDown)),
-                    new Point((int)(pos.xPos + GameLoop.map.xPos + width),
-                            (int)(pos.yPos + GameLoop.map.yPos + height + moveAmountDown)))) {
-
-                if (speedDown != 0) {
-                    speedDown -= slowDown;
-                    if (speedDown < 0) {
-                        speedDown = 0;
-                    }
-                }
-                pos.yPos += moveAmountDown;
-            } else {
-                speedDown = 0;
-            }
-
-        }
-        if (right) {
-
-            if (!Check.CollisionPlayerBlock(
-                    new Point((int)(pos.xPos + GameLoop.map.xPos + width + moveAmountRight),
-                            (int)(pos.yPos + GameLoop.map.yPos)),
-                    new Point((int)(pos.xPos + GameLoop.map.xPos + width + moveAmountRight),
-                            (int)(pos.yPos + GameLoop.map.yPos + height)))) {
-
-                if (speedRight < maxSpeed) {
-                    speedRight += slowDown;
-                } else {
-                    speedRight = maxSpeed;
-                }
-
-                pos.xPos += moveAmountRight;
-            } else {
-                speedRight = 0;
-            }
-
-        }else {
-
-            if (!Check.CollisionPlayerBlock(
-                    new Point((int)(pos.xPos + GameLoop.map.xPos + width + moveAmountRight),
-                            (int)(pos.yPos + GameLoop.map.yPos)),
-                    new Point((int)(pos.xPos + GameLoop.map.xPos + width + moveAmountRight),
-                            (int)(pos.yPos + GameLoop.map.yPos + height)))) {
-
-                if (speedRight != 0) {
-                    speedRight -= slowDown;
-                    if (speedRight < 0) {
-                        speedRight = 0;
-                    }
-                }
-                pos.xPos += moveAmountRight;
-            } else {
-                speedRight = 0;
-            }
-
-        }
-
-        if (left) {
-
-            if (!Check.CollisionPlayerBlock(
-                    new Point((int)(pos.xPos + GameLoop.map.xPos - moveAmountLeft),
-                            (int)(pos.yPos + GameLoop.map.yPos + height)),
-                    new Point((int)(pos.xPos + GameLoop.map.xPos - moveAmountLeft),
-                            (int)(pos.yPos + GameLoop.map.yPos)))) {
-
-                if (speedLeft < maxSpeed) {
-                    speedLeft += slowDown;
-                } else {
-                    speedLeft = maxSpeed;
-                }
-
-                pos.xPos -= moveAmountLeft;
-            } else {
-                speedLeft = 0;
-            }
-
-        }else {
-
-            if (!Check.CollisionPlayerBlock(
-                    new Point((int)(pos.xPos + GameLoop.map.xPos - moveAmountLeft),
-                            (int)(pos.yPos + GameLoop.map.yPos + height)),
-                    new Point((int)(pos.xPos + GameLoop.map.xPos - moveAmountLeft),
-                            (int)(pos.yPos + GameLoop.map.yPos)))) {
-
-                if (speedLeft != 0) {
-                    speedLeft -= slowDown;
-                    if (speedLeft < 0) {
-                        speedLeft = 0;
-                    }
-                }
-
-                pos.xPos -= moveAmountLeft;
-            } else {
-                speedLeft = 0;
-            }
-
-        }
-
-    }*/
 }

@@ -74,6 +74,8 @@ public class HUDmanager {
             g.drawString("[MapXpos]" + world.getWorldXpos(), 20, 50);
             g.drawString("[MapYpos]" + world.getWorldYpos(), 20, 80);
             g.drawString("[LoadedBlocks]" + TileManager.getBlocks().size(), 20, 110);
+            g.drawString("[MAIN.WIDTH]" + Main.width, 20, 140);
+            g.drawString("[MAIN.HEIGHT]" + Main.height, 20, 170);
         }
     }
 }

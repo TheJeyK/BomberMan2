@@ -8,6 +8,9 @@ import com.waving.managers.MouseManager;
 
 import java.awt.*;
 
+import static com.waving.gamestates.GameStateButton.ButtonType.*;
+import static com.waving.gamestates.GameStateButton.ButtonType.NO;
+
 public class QuitState extends GameState{
 
 
@@ -25,8 +28,8 @@ public class QuitState extends GameState{
     public void init() {
         mouseManager = new MouseManager();
 
-        yes = new GameStateButton(Main.width/3, 200, "Yes!");
-        no = new GameStateButton(Main.width/3, 300, "No!");
+        yes = new GameStateButton(Main.width/3, 200, YES);
+        no = new GameStateButton(Main.width/3, 300, NO);
     }
 
     @Override

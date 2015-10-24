@@ -29,6 +29,7 @@ public class World {
 
     //BOOLEANS
     private boolean hasSize = false;
+    private boolean generated;
 
     public World(String worldName) {
         this.worldName = worldName;
@@ -50,7 +51,9 @@ public class World {
 
         Vector2F.setWorldVariables(map_pos.xPos, map_pos.yPos);
 
-        spawn.tick(deltaTime);
+        if (!player.hasSpawned()) {
+            spawn.tick(deltaTime);
+        }
 
         tiles.tick(deltaTime);
 
@@ -62,7 +65,9 @@ public class World {
     public void render(Graphics2D g) {
         tiles.render(g);
 
-        spawn.render(g);
+        if (!player.hasSpawned()) {
+            spawn.render(g);
+        }
 
         if (player != null) {
             player.render(g);
@@ -145,6 +150,8 @@ public class World {
                 }
             }
         }
+
+        generated = true;
     }
 
     public void setSize(int world_width, int world_height) {
@@ -187,5 +194,9 @@ public class World {
 
     public TileManager getWorldBlocks() {
         return tiles;
+    }
+
+    public boolean isGenerated() {
+        return generated;
     }
 }

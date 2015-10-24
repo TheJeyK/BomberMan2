@@ -27,12 +27,16 @@ public class WavingLevelLoader extends GameState {
 
     @Override
     public void tick(double deltaTime) {
-        world.tick(deltaTime);
+        if (world.isGenerated()) {
+            world.tick(deltaTime);
+        }
     }
 
     @Override
     public void render(Graphics2D g) {
-        world.render(g);
+        if (world.isGenerated()) {
+            world.render(g);
+        }
     }
 
 }

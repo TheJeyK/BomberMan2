@@ -3,10 +3,14 @@ package com.waving.gamestate;
 import com.waving.gamestates.GameState;
 import com.waving.gamestates.GameStateButton;
 import com.waving.gamestates.GameStateManager;
+import com.waving.main.Assets;
 import com.waving.main.Main;
 import com.waving.managers.MouseManager;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+
+import static com.waving.gamestates.GameStateButton.ButtonType.*;
 
 public class MenuState extends GameState{
 
@@ -19,6 +23,8 @@ public class MenuState extends GameState{
 
     MouseManager mouseManager;
 
+    BufferedImage image = Assets.getBackground();
+
     public MenuState(GameStateManager gsm) {
         super(gsm);
     }
@@ -27,10 +33,10 @@ public class MenuState extends GameState{
     public void init() {
         mouseManager = new MouseManager();
 
-        startGame = new GameStateButton(Main.width/3, 200, new WavingLevelLoader(gsm), gsm, "Start Game");
-        multiPlayer = new GameStateButton(Main.width/3, 300, new WavingLevelLoader(gsm), gsm, "Multiplayer");
-        options = new GameStateButton(Main.width/3, 400, new WavingLevelLoader(gsm), gsm, "Options");
-        quitGame = new GameStateButton(Main.width/3, 500, new QuitState(gsm), gsm, "Quit");
+        startGame = new GameStateButton(Main.width/2 -100, 200, new WavingLevelLoader(gsm), gsm, START_GAME);
+        multiPlayer = new GameStateButton(Main.width/2 -100, 300, new WavingLevelLoader(gsm), gsm, MULTI_PLAYER);
+        options = new GameStateButton(Main.width/2 -100, 400, new WavingLevelLoader(gsm), gsm, OPTIONS);
+        quitGame = new GameStateButton(Main.width/2 -100, 500, new QuitState(gsm), gsm, QUIT);
     }
 
     @Override
@@ -45,6 +51,9 @@ public class MenuState extends GameState{
 
     @Override
     public void render(Graphics2D g) {
+
+        g.drawImage(image, 0, 0, Main.width, Main.height, null);
+
         startGame.render(g);
         multiPlayer.render(g);
         options.render(g);
@@ -52,6 +61,6 @@ public class MenuState extends GameState{
 
         mouseManager.render(g);
 
-        g.clipRect(0, 0, Main.width, Main.height);
+        //g.clipRect(0, 0, Main.width, Main.height);
     }
 }
