@@ -15,6 +15,8 @@ public class Assets {
 
     //PLAYER
     public static SpriteSheet player = new SpriteSheet();
+    public static BufferedImage laserHorizontal;
+    public static BufferedImage laserVertical;
 
     //MOUSE
     public static SpriteSheet mouse = new SpriteSheet();
@@ -54,6 +56,10 @@ public class Assets {
         iceblocks.setSpriteSheet(loadImageFrom.LoadImageFrom(Main.class, "ice_world.png"));
         player.setSpriteSheet(loadImageFrom.LoadImageFrom(Main.class, "playersprite.png"));
         button.setSpriteSheet(loadImageFrom.LoadImageFrom(Main.class, "gamestate_button.png"));
+
+        //LASER
+        laserHorizontal = loadImageFrom.LoadImageFrom(Main.class, "laser_horizontal.png");
+        laserVertical = loadImageFrom.LoadImageFrom(Main.class, "laser_vertical.png");
 
         //BACKGROUND
         background = loadImageFrom.LoadImageFrom(Main.class, "background.png");
@@ -179,5 +185,13 @@ public class Assets {
 
     public static BufferedImage getBackground() {
         return background;
+    }
+
+    public static BufferedImage getLaserHorizontal() {
+        return laserHorizontal;
+    }
+
+    public static BufferedImage getLaserVertical() {
+        return laserVertical;
     }
 }

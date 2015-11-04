@@ -18,7 +18,7 @@ public class World {
     private int worldWidth;
     private int worldHeight;
     private int blockSize = 54;
-    private Player player;
+    private  static Player player;
 
     //LISTS
     public TileManager tiles;
@@ -81,70 +81,73 @@ public class World {
         if (hasSize) {
             try {
                 map = loadImageFrom.LoadImageFrom(Main.class, mapFile+".png");
-            } catch (Exception e) {
+            } catch (Exception ignored) {
 
             }
 
             for (int x = 0; x < worldWidth; x++) {
                 for (int y = 0; y < worldHeight; y++) {
 
-                    int col = map.getRGB(x, y);
+                    int col = 0;
+                    if (map != null) {
+                        col = map.getRGB(x, y);
+                    }
 
                     switch (col & 0xFFFFFF) {
                         case 0x808080:
-                            tiles.blocks.add(
-                                    new Block(new Vector2F(x*Block.getBlockSize(),
-                                            y*Block.getBlockSize()), Block.BlockType.STONE_1));
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.STONE_1));
                             break;
                         case 0x202020:
-                            tiles.blocks.add(
-                                    new Block(new Vector2F(x*Block.getBlockSize(),
-                                            y*Block.getBlockSize()), Block.BlockType.WALL_1));
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.WALL_1));
                             break;
                         case 0x606060:
-                            tiles.blocks.add(
-                                    new Block(new Vector2F(x*Block.getBlockSize(),
-                                            y*Block.getBlockSize()), Block.BlockType.ROOF_1));
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.ROOF_1));
                             break;
                         case 0x101010:
-                            tiles.blocks.add(
-                                    new Block(new Vector2F(x*Block.getBlockSize(),
-                                            y*Block.getBlockSize()), Block.BlockType.INTER_WALL_1));
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.INTER_WALL_1));
                             break;
                         case 0x93d6bf:
-                            tiles.blocks.add(
-                                    new Block(new Vector2F(x*Block.getBlockSize(),
-                                            y*Block.getBlockSize()), Block.BlockType.ICE_WALL_1));
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.ICE_WALL_1));
                             break;
                         case 0x26c30f:
-                            tiles.blocks.add(
-                                    new Block(new Vector2F(x*Block.getBlockSize(),
-                                            y*Block.getBlockSize()), Block.BlockType.ICE_ROOF_1));
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.ICE_ROOF_1));
                             break;
                         case 0x2697f0:
-                            tiles.blocks.add(
-                                    new Block(new Vector2F(x*Block.getBlockSize(),
-                                            y*Block.getBlockSize()), Block.BlockType.ICE_FLOOR_1));
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.ICE_FLOOR_1));
                             break;
                         case 0xbfb4f8:
-                            tiles.blocks.add(
-                                    new Block(new Vector2F(x*Block.getBlockSize(),
-                                            y*Block.getBlockSize()), Block.BlockType.ICE_ROAD_HORIZONTAL));
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.ICE_ROAD_HORIZONTAL));
                             break;
                         case 0xd93cf0:
-                            tiles.blocks.add(
-                                    new Block(new Vector2F(x*Block.getBlockSize(),
-                                            y*Block.getBlockSize()), Block.BlockType.ICE_ROAD_VERTICAL));
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.ICE_ROAD_VERTICAL));
                             break;
                         case 0x403578:
-                            tiles.blocks.add(
-                                    new Block(new Vector2F(x*Block.getBlockSize(),
-                                            y*Block.getBlockSize()), Block.BlockType.ICE_ROAD_LEFT_DOWN));
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.ICE_ROAD_LEFT_DOWN));
                             break;
                         case 0x6c2940:
-                            tiles.blocks.add(
-                                    new Block(new Vector2F(x*Block.getBlockSize(),
-                                            y*Block.getBlockSize()), Block.BlockType.ICE_ROAD_UP_RIGHT_DOWN));
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.ICE_ROAD_UP_RIGHT_DOWN));
                             break;
                     }
                 }
@@ -161,10 +164,10 @@ public class World {
     }
 
     public void addPlayer(Player player) {
-        this.player = player;
+        World.player = player;
     }
 
-    public Player getPlayer() {
+    public static Player getPlayer() {
         return player;
     }
 

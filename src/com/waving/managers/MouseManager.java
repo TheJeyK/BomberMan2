@@ -1,5 +1,6 @@
 package com.waving.managers;
 
+import com.waving.generator.World;
 import com.waving.main.Assets;
 
 import java.awt.*;
@@ -15,6 +16,14 @@ public class MouseManager implements MouseWheelListener, MouseMotionListener, Mo
 
     public void tick() {
         mouse = new Point(mouseMovedX, mouseMovedY);
+
+        if (HUDmanager.up != null) {
+            if (HUDmanager.up.contains(mouse)) {
+                if (pressed) {
+                    World.getPlayer().getPlayerActions().attackUP();
+                }
+            }
+        }
     }
 
     public void render(Graphics2D g) {

@@ -9,6 +9,7 @@ import my.project.gop.main.Light;
 import my.project.gop.main.Vector2F;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -30,6 +31,12 @@ public class HUDmanager {
 
         //light = loadImageFrom.LoadImageFrom(Main.class, "light.png");
     }
+
+    public static Polygon up;
+    public static Polygon down;
+    public static Polygon right;
+    public static Polygon left;
+
 
     private void addLights() {
 
@@ -77,5 +84,28 @@ public class HUDmanager {
             g.drawString("[MAIN.WIDTH]" + Main.width, 20, 140);
             g.drawString("[MAIN.HEIGHT]" + Main.height, 20, 170);
         }
+
+
+        int[] ux = new int[]{Main.width-1, Main.width/2, Main.width/2, 0};
+        int[] uy = new int[]{0, Main.height/2, Main.height/2, 0};
+        up = new Polygon(ux, uy, ux.length);
+        g.drawPolygon(up);
+
+
+        int[] dx = new int[]{Main.width - 1, Main.width / 2, Main.width / 2 , 0};
+        int[] dy = new int[]{Main.height - 1, Main.height / 2, Main.height / 2, Main.height - 1};
+        down = new Polygon(dx, dy, dx.length);
+        g.drawPolygon(down);
+
+        int[] lx = new int[]{0, Main.width / 2, Main.width / 2, 0};
+        int[] ly = new int[]{Main.height,Main.height / 2,Main.height / 2,0};
+        left = new Polygon(lx, ly, lx.length);
+        g.drawPolygon(left);
+
+        int[] rx = new int[]{Main.width - 1,Main.width / 2,Main.width / 2,Main.width - 1};
+        int[] ry = new int[]{Main.height ,Main.height / 2,Main.height / 2,0};
+        right = new Polygon(rx, ry, rx.length);
+        g.drawPolygon(right);
+
     }
 }

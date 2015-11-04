@@ -39,6 +39,7 @@ public class Player implements KeyListener {
     private float speedRight = 0;
     private float slowDown = 0.15F;
     private float fixDt = 52F/60F;
+    private double laserScale = 3.5;
 
     GameStateButton button1 = new GameStateButton(200, 200);
     private BufferedImage button1DefaultImage;
@@ -55,6 +56,7 @@ public class Player implements KeyListener {
 
     private HUDmanager hudManager;
     private GUImanager guiManager;
+    private PlayerActions playerActions;
 
     /*
      * 0 = Up
@@ -93,6 +95,7 @@ public class Player implements KeyListener {
 
     public void init(World world) {
 
+        playerActions = new PlayerActions(world);
         hudManager = new HUDmanager(world);
         guiManager = new GUImanager();
         this.world = world;
@@ -498,8 +501,7 @@ public class Player implements KeyListener {
             }
         }
 
-        /*g.drawRect((int)pos.xPos - renderDistanceWidth *32/2 + width/2, (int)pos.yPos-renderDistanceHeight*32/2 + height/2,
-                renderDistanceWidth *32, renderDistanceHeight*32);*/
+
         guiManager.render(g);
         hudManager.render(g);
 
@@ -575,4 +577,33 @@ public class Player implements KeyListener {
         }
     }
 
+    public PlayerActions getPlayerActions() {
+        return playerActions;
+    }
+
+    public class PlayerActions {
+
+        private BufferedImage attackImage;
+        private World world;
+
+        public PlayerActions(World world) {
+            this.world = world;
+        }
+
+        public void attackUP() {
+            attackImage = Assets.getLaserVertical();
+        }
+
+        public void attackDOWN() {
+            attackImage = Assets.getLaserVertical();
+        }
+
+        public void attackLEFT() {
+            attackImage = Assets.getLaserHorizontal();
+        }
+
+        public void attackRIGHT() {
+            attackImage = Assets.getLaserHorizontal();
+        }
+    }
 }
