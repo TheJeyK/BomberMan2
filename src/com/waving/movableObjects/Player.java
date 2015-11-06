@@ -1,5 +1,6 @@
 package com.waving.movableObjects;
 
+import com.waving.gamestate.WavingLevelLoader;
 import com.waving.gamestates.GameStateButton;
 import com.waving.generator.World;
 import com.waving.main.Animator;
@@ -39,7 +40,7 @@ public class Player implements KeyListener {
     private float speedRight = 0;
     private float slowDown = 0.15F;
     private float fixDt = 52F/60F;
-    private double laserScale = 3.5;
+    private double laserScale = 3;
 
     GameStateButton button1 = new GameStateButton(200, 200);
     private BufferedImage button1DefaultImage;
@@ -529,6 +530,9 @@ public class Player implements KeyListener {
         if (key == KeyEvent.VK_D) {
             right = true;
         }
+        if (key == KeyEvent.VK_P) {
+            WavingLevelLoader.changeToWorld("world2", "map2");
+        }
         if (key == KeyEvent.VK_SHIFT) {
             //running = true;
             //animationSpeed = animationRunningSpeed;
@@ -591,19 +595,19 @@ public class Player implements KeyListener {
         }
 
         public void attackUP() {
-            attackImage = Assets.getLaserVertical();
+            attackImage = Assets.getLaserAttack();
         }
 
         public void attackDOWN() {
-            attackImage = Assets.getLaserVertical();
+            attackImage = Assets.getLaserAttack();
         }
 
         public void attackLEFT() {
-            attackImage = Assets.getLaserHorizontal();
+            attackImage = Assets.getLaserAttack();
         }
 
         public void attackRIGHT() {
-            attackImage = Assets.getLaserHorizontal();
+            attackImage = Assets.getLaserAttack();
         }
     }
 }

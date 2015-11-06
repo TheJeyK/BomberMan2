@@ -9,20 +9,34 @@ import java.awt.*;
 
 public class WavingLevelLoader extends GameState {
 
+    public static World world;
+    private String worldName;
+    private String mapName;
+
     public WavingLevelLoader(GameStateManager gsm) {
         super(gsm);
     }
 
-    World world;
+    public WavingLevelLoader(GameStateManager gsm, String worldname, String mapname) {
+        super(gsm);
+        this.worldName = worldname;
+        this.mapName = mapname;
+    }
 
     @Override
     public void init() {
-        world = new World("World1");
+
+        if (worldName == null) {
+            worldName = "NULL";
+            mapName = "map";
+        }
+
+        world = new World(worldName, this, gsm);
         world.setSize(100, 100);
         world.setWorldSpawn(1, 4);
         world.addPlayer(new Player());
         world.init();
-        world.generate("map");
+        world.generate(mapName);
     }
 
     @Override
@@ -37,6 +51,12 @@ public class WavingLevelLoader extends GameState {
         if (world.isGenerated()) {
             world.render(g);
         }
+    }
+
+    public static void changeToWorld(String wn, String mn) {
+        world.resetWorld();
+        GameStateManager.states.push(new WavingLevelLoader(gsm, wn, mn));
+        GameStateManager.states.peek().init();
     }
 
 }

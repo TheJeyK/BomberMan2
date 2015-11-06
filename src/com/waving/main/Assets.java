@@ -15,7 +15,7 @@ public class Assets {
 
     //PLAYER
     public static SpriteSheet player = new SpriteSheet();
-    public static BufferedImage laserHorizontal;
+    public static BufferedImage laserAttack;
     public static BufferedImage laserVertical;
 
     //MOUSE
@@ -58,8 +58,7 @@ public class Assets {
         button.setSpriteSheet(loadImageFrom.LoadImageFrom(Main.class, "gamestate_button.png"));
 
         //LASER
-        laserHorizontal = loadImageFrom.LoadImageFrom(Main.class, "laser_horizontal.png");
-        laserVertical = loadImageFrom.LoadImageFrom(Main.class, "laser_vertical.png");
+        laserAttack = loadImageFrom.LoadImageFrom(Main.class, "laser.png");
 
         //BACKGROUND
         background = loadImageFrom.LoadImageFrom(Main.class, "background.png");
@@ -187,11 +186,7 @@ public class Assets {
         return background;
     }
 
-    public static BufferedImage getLaserHorizontal() {
-        return laserHorizontal;
-    }
-
-    public static BufferedImage getLaserVertical() {
-        return laserVertical;
+    public static BufferedImage getLaserAttack() {
+        return laserAttack;
     }
 }

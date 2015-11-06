@@ -1,6 +1,8 @@
 package com.waving.generator;
 
 
+import com.waving.gamestate.WavingLevelLoader;
+import com.waving.gamestates.GameStateManager;
 import com.waving.main.Main;
 import com.waving.movableObjects.Player;
 import my.project.gop.main.Vector2F;
@@ -31,7 +33,7 @@ public class World {
     private boolean hasSize = false;
     private boolean generated;
 
-    public World(String worldName) {
+    public World(String worldName, WavingLevelLoader wavingLevelLoader, GameStateManager gsm) {
         this.worldName = worldName;
         Vector2F.setWorldVariables(map_pos.xPos, map_pos.yPos);
     }
@@ -201,5 +203,11 @@ public class World {
 
     public boolean isGenerated() {
         return generated;
+    }
+
+    public void resetWorld() {
+        tiles.getBlocks().clear();
+        //blockEnts.clear();
+        spawn = null;
     }
 }
