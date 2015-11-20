@@ -22,11 +22,15 @@ public class World {
     private int blockSize = 54;
     private  static Player player;
 
+    private WavingLevelLoader wll;
+    private GameStateManager gsm;
+
+
     //LISTS
     public TileManager tiles;
 
     //WORLD SPAWN
-    private Block spawn;
+    public Block spawn;
 
 
     //BOOLEANS
@@ -35,11 +39,13 @@ public class World {
 
     public World(String worldName, WavingLevelLoader wavingLevelLoader, GameStateManager gsm) {
         this.worldName = worldName;
+        this.wll = wavingLevelLoader;
+        this.gsm = gsm;
         Vector2F.setWorldVariables(map_pos.xPos, map_pos.yPos);
     }
 
     public void init() {
-        tiles = new TileManager();
+        tiles = new TileManager(this);
 
         map_pos.xPos = spawn.getBlockLocation().xPos - player.getPos().xPos;
         map_pos.yPos = spawn.getBlockLocation().yPos - player.getPos().yPos;
@@ -73,6 +79,10 @@ public class World {
 
         if (player != null) {
             player.render(g);
+        }
+
+        for (Block block : TileManager.getBlocks()) {
+            block.renderBlockLightLevel(g);
         }
     }
 
@@ -151,6 +161,10 @@ public class World {
                                     new Block(new Vector2F(x * Block.getBlockSize(),
                                             y * Block.getBlockSize()), Block.BlockType.ICE_ROAD_UP_RIGHT_DOWN));
                             break;
+                        case 0xff0000:
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.EXIT_ICE));
                     }
                 }
             }
@@ -206,8 +220,14 @@ public class World {
     }
 
     public void resetWorld() {
-        tiles.getBlocks().clear();
+        TileManager.getBlocks().clear();
         //blockEnts.clear();
         spawn = null;
+    }
+
+    public void changeToWorld(String wn, String mn) {
+        this.resetWorld();
+        GameStateManager.states.push(new WavingLevelLoader(gsm, wn, mn));
+        GameStateManager.states.peek().init();
     }
 }

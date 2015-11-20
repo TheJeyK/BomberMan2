@@ -49,6 +49,7 @@ public class Assets {
     private static BufferedImage ice_road_vertical;
     private static BufferedImage ice_road_left_down;
     private static BufferedImage ice_road_up_right_down;
+    private static BufferedImage exit_ice;
 
     public void init() {
         mouse.setSpriteSheet(loadImageFrom.LoadImageFrom(Main.class, "mouse_sprites.png"));
@@ -92,6 +93,7 @@ public class Assets {
         ice_road_vertical = iceblocks.getTile(16, 32, 16, 16);
         ice_road_left_down = iceblocks.getTile(48, 32, 16, 16);
         ice_road_up_right_down = iceblocks.getTile(16, 48, 16 ,16);
+        exit_ice = iceblocks.getTile(16, 32, 16, 16);
     }
 
     public static BufferedImage getButton_heldOver() {
@@ -188,5 +190,9 @@ public class Assets {
 
     public static BufferedImage getLaserAttack() {
         return laserAttack;
+    }
+
+    public static BufferedImage getExit_ice() {
+        return exit_ice;
     }
 }

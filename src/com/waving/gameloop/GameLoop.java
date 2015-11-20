@@ -3,7 +3,6 @@ package com.waving.gameloop;
 import com.waving.gamestates.GameStateManager;
 import com.waving.main.Assets;
 import my.project.gop.main.GOPGameLoop;
-import my.project.gop.main.Vector2F;
 
 public class GameLoop extends GOPGameLoop {
 

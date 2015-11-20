@@ -17,13 +17,14 @@ public class MouseManager implements MouseWheelListener, MouseMotionListener, Mo
     public void tick() {
         mouse = new Point(mouseMovedX, mouseMovedY);
 
+        /*
         if (HUDmanager.up != null) {
             if (HUDmanager.up.contains(mouse)) {
                 if (pressed) {
                     World.getPlayer().getPlayerActions().attackUP();
                 }
             }
-        }
+        */
     }
 
     public void render(Graphics2D g) {

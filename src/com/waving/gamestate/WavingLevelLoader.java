@@ -2,6 +2,7 @@ package com.waving.gamestate;
 
 import com.waving.gamestates.GameState;
 import com.waving.gamestates.GameStateManager;
+import com.waving.generator.TileManager;
 import com.waving.generator.World;
 import com.waving.movableObjects.Player;
 
@@ -10,7 +11,7 @@ import java.awt.*;
 public class WavingLevelLoader extends GameState {
 
     public static World world;
-    private String worldName;
+    private static String worldName;
     private String mapName;
 
     public WavingLevelLoader(GameStateManager gsm) {
@@ -19,7 +20,7 @@ public class WavingLevelLoader extends GameState {
 
     public WavingLevelLoader(GameStateManager gsm, String worldname, String mapname) {
         super(gsm);
-        this.worldName = worldname;
+        worldName = worldname;
         this.mapName = mapname;
     }
 
@@ -27,7 +28,7 @@ public class WavingLevelLoader extends GameState {
     public void init() {
 
         if (worldName == null) {
-            worldName = "NULL";
+            worldName = "world1";
             mapName = "map";
         }
 
@@ -53,10 +54,14 @@ public class WavingLevelLoader extends GameState {
         }
     }
 
-    public static void changeToWorld(String wn, String mn) {
-        world.resetWorld();
-        GameStateManager.states.push(new WavingLevelLoader(gsm, wn, mn));
-        GameStateManager.states.peek().init();
+    public static void changeWorldTo(String worldName, String map) {
+
+        TileManager.getBlocks().clear();
+        WavingLevelLoader.worldName = worldName;
+        world.generate(map);
     }
 
+    public static String getWorldName() {
+        return worldName;
+    }
 }

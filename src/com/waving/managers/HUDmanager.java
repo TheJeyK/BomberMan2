@@ -1,5 +1,6 @@
 package com.waving.managers;
 
+import com.waving.gamestate.WavingLevelLoader;
 import com.waving.generator.Block;
 import com.waving.generator.TileManager;
 import com.waving.generator.World;
@@ -31,12 +32,12 @@ public class HUDmanager {
 
         //light = loadImageFrom.LoadImageFrom(Main.class, "light.png");
     }
-
+    /*
     public static Polygon up;
     public static Polygon down;
     public static Polygon right;
     public static Polygon left;
-
+    */
 
     private void addLights() {
 
@@ -83,29 +84,32 @@ public class HUDmanager {
             g.drawString("[LoadedBlocks]" + TileManager.getBlocks().size(), 20, 110);
             g.drawString("[MAIN.WIDTH]" + Main.width, 20, 140);
             g.drawString("[MAIN.HEIGHT]" + Main.height, 20, 170);
+            g.drawString("[WORLD.NAME]" + WavingLevelLoader.getWorldName(), 20, 200);
         }
 
-
+        /*
         int[] ux = new int[]{Main.width-1, Main.width/2, Main.width/2, 0};
         int[] uy = new int[]{0, Main.height/2, Main.height/2, 0};
         up = new Polygon(ux, uy, ux.length);
-        g.drawPolygon(up);
 
 
         int[] dx = new int[]{Main.width - 1, Main.width / 2, Main.width / 2 , 0};
         int[] dy = new int[]{Main.height - 1, Main.height / 2, Main.height / 2, Main.height - 1};
         down = new Polygon(dx, dy, dx.length);
-        g.drawPolygon(down);
 
         int[] lx = new int[]{0, Main.width / 2, Main.width / 2, 0};
         int[] ly = new int[]{Main.height,Main.height / 2,Main.height / 2,0};
         left = new Polygon(lx, ly, lx.length);
-        g.drawPolygon(left);
 
         int[] rx = new int[]{Main.width - 1,Main.width / 2,Main.width / 2,Main.width - 1};
         int[] ry = new int[]{Main.height ,Main.height / 2,Main.height / 2,0};
         right = new Polygon(rx, ry, rx.length);
-        g.drawPolygon(right);
 
+
+        g.drawPolygon(up);
+        g.drawPolygon(down);
+        g.drawPolygon(left);
+        g.drawPolygon(right);
+        */
     }
 }

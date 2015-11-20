@@ -1,7 +1,10 @@
 package com.waving.movableObjects;
 
 import com.waving.gamestate.WavingLevelLoader;
+import com.waving.gamestates.GameState;
 import com.waving.gamestates.GameStateButton;
+import com.waving.generator.Block;
+import com.waving.generator.TileManager;
 import com.waving.generator.World;
 import com.waving.main.Animator;
 import com.waving.main.Assets;
@@ -41,6 +44,8 @@ public class Player implements KeyListener {
     private float slowDown = 0.15F;
     private float fixDt = 52F/60F;
     private double laserScale = 3;
+    private static boolean worldUnchanged = true;
+    private static int changeCounter = 0;
 
     GameStateButton button1 = new GameStateButton(200, 200);
     private BufferedImage button1DefaultImage;
@@ -52,6 +57,7 @@ public class Player implements KeyListener {
     private int renderDistanceWidth = Main.width/34;
     private int renderDistanceHeight = Main.height/38;
     public static Rectangle render;
+    public static Rectangle playerBox;
 
     private int animationState = 0;
 
@@ -105,6 +111,11 @@ public class Player implements KeyListener {
                 (int)(pos.yPos - pos.getWorldLocation().yPos + pos.yPos - renderDistanceHeight*32/2 + height/2),
                 renderDistanceWidth *32,
                 renderDistanceHeight*32);
+
+        playerBox = new Rectangle((int)(pos.xPos - pos.getWorldLocation().xPos + pos.xPos - renderDistanceWidth *32/2 + width/2),
+                (int)(pos.yPos - pos.getWorldLocation().yPos + pos.yPos - renderDistanceHeight*32/2 + height/2),
+                renderDistanceWidth *8,
+                renderDistanceHeight*8);
 
         listUp = new ArrayList<BufferedImage>();
         listDown = new ArrayList<BufferedImage>();
@@ -172,10 +183,23 @@ public class Player implements KeyListener {
         playerMouseManager.tick();
         button1.tick();
 
+        playerBox = new Rectangle((int)(pos.xPos - pos.getWorldLocation().xPos + pos.xPos - renderDistanceWidth *32/2 + width/2),
+                (int)(pos.yPos - pos.getWorldLocation().yPos + pos.yPos - renderDistanceHeight*32/2 + height/2),
+                renderDistanceWidth *8,
+                renderDistanceHeight*8);
+
         render = new Rectangle((int)(pos.xPos - pos.getWorldLocation().xPos + pos.xPos - renderDistanceWidth *32/2 + width/2),
                 (int)(pos.yPos - pos.getWorldLocation().yPos + pos.yPos - renderDistanceHeight*32/2 + height/2),
                 renderDistanceWidth *32,
                 renderDistanceHeight*32);
+
+
+        /*
+        playerBox = new Rectangle((int)(pos.xPos),
+                (int)(pos.yPos),
+                width,
+                height);
+        */
 
         render.setBounds(render);
         float moveAmountUp = speedUp * fixDt;
@@ -226,6 +250,10 @@ public class Player implements KeyListener {
 
             animationState = 4; //standing still
         }
+    }
+
+    public boolean overlaps(Rectangle r1, Rectangle r2) {
+        return r1.x < r2.x + r2.width && r1.x + r1.width > r2.x && r1.y < r2.y + r2.width && r1.y + r1.height > r2.y;
     }
 
 
@@ -530,8 +558,17 @@ public class Player implements KeyListener {
         if (key == KeyEvent.VK_D) {
             right = true;
         }
+        if (key == KeyEvent.VK_O) {
+            WavingLevelLoader.changeWorldTo("world1", "map");
+            changeCounter++;
+        }
         if (key == KeyEvent.VK_P) {
-            WavingLevelLoader.changeToWorld("world2", "map2");
+            WavingLevelLoader.changeWorldTo("world2", "map2");
+            changeCounter++;
+        }
+        if (key == KeyEvent.VK_I) {
+            WavingLevelLoader.changeWorldTo("world3", "map3");
+            changeCounter++;
         }
         if (key == KeyEvent.VK_SHIFT) {
             //running = true;
@@ -542,13 +579,10 @@ public class Player implements KeyListener {
             System.exit(1);
         }
         if (key == KeyEvent.VK_F3) {
-            if (!debug) {
-                debug = true;
-            } else {
-                debug = false;
-            }
+            debug = !debug;
         }
     }
+
 
     public static boolean isDebugging() {
         return debug;

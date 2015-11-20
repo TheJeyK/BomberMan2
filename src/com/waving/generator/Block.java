@@ -19,6 +19,7 @@ public class Block extends Rectangle{
     private boolean isAlive;
     private Rectangle area;
     private boolean dropped = false;
+    private float lightLevel = 1;
 
     /**Constructor del la clase Block
      * @param pos
@@ -82,6 +83,9 @@ public class Block extends Rectangle{
             case ICE_ROAD_UP_RIGHT_DOWN:
                 block = Assets.getIce_road_up_right_down();
                 break;
+            case EXIT_ICE:
+                block = Assets.getExit_ice();
+                break;
         }
     }
 
@@ -95,6 +99,14 @@ public class Block extends Rectangle{
         }
     }
 
+    public void renderBlockLightLevel(Graphics2D g) {
+        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, lightLevel));
+        g.setColor(Color.BLACK);
+        g.fillRect((int)pos.getWorldLocation().xPos, (int)pos.getWorldLocation().yPos, blockSize, blockSize);
+        g.setColor(Color.WHITE);
+        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
+    }
+
     /**
      * Renderiza o dibuja en la pantalla el bloque
      * @param g
@@ -102,7 +114,9 @@ public class Block extends Rectangle{
     public void render(Graphics2D g) {
 
         if (isAlive) {
-            g.drawImage(block, (int)pos.getWorldLocation().xPos, (int)pos.getWorldLocation().yPos, blockSize, blockSize, null);
+            if (block != null) {
+                g.drawImage(block, (int)pos.getWorldLocation().xPos, (int)pos.getWorldLocation().yPos, blockSize, blockSize, null);
+            }
         } else if (!dropped) {
             float xpos = pos.xPos + 24 - 12;
             float ypos = pos.yPos + 24 - 12;
@@ -125,7 +139,20 @@ public class Block extends Rectangle{
         return isSolid;
     }
 
+    public void addShadow(float amount) {
+        if (lightLevel != 1) {
+            if (lightLevel < 5.006000) {
+                lightLevel += amount;
+            }
+        }
 
+    }
+
+    public void removeShadow(float amount) {
+        if (lightLevel > 0.006000) {
+            lightLevel -= amount;
+        }
+    }
 
     public boolean isAlive() {
         return isAlive;
@@ -148,6 +175,8 @@ public class Block extends Rectangle{
         return area;
     }
 
+
+
     public Vector2F getBlockLocation() {
         return this.pos;
     }
@@ -167,10 +196,23 @@ public class Block extends Rectangle{
         ICE_ROAD_HORIZONTAL, //bfb4f8
         ICE_ROAD_VERTICAL, //d93cf0
         ICE_ROAD_LEFT_DOWN, //403578
-        ICE_ROAD_UP_RIGHT_DOWN //6c2940
+        ICE_ROAD_UP_RIGHT_DOWN, //6c2940
+        EXIT_ICE //ff0000
     }
 
     public static int getBlockSize() {
         return blockSize;
+    }
+
+    public BlockType getBlockType() {
+        return blockType;
+    }
+
+    public float getLightLevel() {
+        return lightLevel;
+    }
+
+    public void setLightLevel(float lightLevel) {
+        this.lightLevel = lightLevel;
     }
 }
