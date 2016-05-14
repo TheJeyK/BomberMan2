@@ -2,6 +2,8 @@ package com.waving.managers;
 
 import com.waving.generator.Block;
 import com.waving.generator.TileManager;
+import com.waving.main.Main;
+import com.waving.movableObjects.Player;
 import my.project.gop.main.Vector2F;
 
 import java.awt.*;
@@ -37,6 +39,17 @@ public class LightSource {
                 (int)lightDistance);
     }
 
+    public LightSource(Player player) {
+        this.lightLocation = player.getPos();
+        this.lightDistance = lightSize*5;
+
+        lightDetection = new Rectangle(
+                (int)(lightLocation.getWorldLocation().xPos - lightDistance/2 + lightSize/2),
+                (int)(lightLocation.getWorldLocation().yPos - lightDistance/2 + lightSize/2),
+                (int)lightDistance,
+                (int)lightDistance);
+    }
+
     public LightSource(int xpos, int ypos) {
         this.lightLocation.xPos = xpos;
         this.lightLocation.yPos = ypos;
@@ -50,12 +63,12 @@ public class LightSource {
     }
 
     public void tick() {
+
         lightDetection = new Rectangle(
                 (int)(lightLocation.xPos - lightSize*lightDistance/2 + lightSize/2),
                 (int)(lightLocation.yPos - lightSize*lightDistance/2 + lightSize/2),
                 (int)(lightSize*lightDistance),
                 (int)(lightSize*lightDistance));
-        lightLocation.xPos++;
     }
 
     public void render(Graphics2D g) {

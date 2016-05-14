@@ -27,6 +27,7 @@ import java.util.ArrayList;
 public class Player implements KeyListener {
 
     Vector2F pos;
+    private static Vector2F alterPos = new Vector2F(100, 100);
     private World world;
     private int width = 50;
     private int height = 75;
@@ -173,6 +174,8 @@ public class Player implements KeyListener {
         ani_Idle.play();
 
         spawned = true;
+
+        alterPos = pos;
     }
 
     /**
@@ -256,6 +259,9 @@ public class Player implements KeyListener {
         return r1.x < r2.x + r2.width && r1.x + r1.width > r2.x && r1.y < r2.y + r2.width && r1.y + r1.height > r2.y;
     }
 
+    public static Vector2F getAlterPos() {
+        return alterPos;
+    }
 
     public void moveMapUp(float speed) {
         if (!Check.CollisionPlayerBlock(
@@ -618,6 +624,8 @@ public class Player implements KeyListener {
     public PlayerActions getPlayerActions() {
         return playerActions;
     }
+
+
 
     public class PlayerActions {
 

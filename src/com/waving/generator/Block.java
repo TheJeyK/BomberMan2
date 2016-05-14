@@ -62,6 +62,21 @@ public class Block extends Rectangle{
             case INTER_WALL_1:
                 block = Assets.getInter_wall_1();
                 break;
+            case NORMAL_FELICIDADES_1:
+                block = Assets.getNormal_felicidades_1();
+                break;
+            case NORMAL_FELICIDADES_2:
+                block = Assets.getNormal_felicidades_2();
+                break;
+            case NORMAL_FELICIDADES_3:
+                block = Assets.getNormal_felicidades_3();
+                break;
+            case NORMAL_FELICIDADES_4:
+                block = Assets.getNormal_felicidades_4();
+                break;
+            case NORMAL_FELICIDADES_5:
+                block = Assets.getNormal_felicidades_5();
+                break;
             case ICE_WALL_1:
                 block = Assets.getIce_wall_1();
                 break;
@@ -85,6 +100,21 @@ public class Block extends Rectangle{
                 break;
             case EXIT_ICE:
                 block = Assets.getExit_ice();
+                break;
+            case ICE_FELICIDADES_1:
+                block = Assets.getIce_felicidades_1();
+                break;
+            case ICE_FELICIDADES_2:
+                block = Assets.getIce_felicidades_2();
+                break;
+            case ICE_FELICIDADES_3:
+                block = Assets.getIce_felicidades_3();
+                break;
+            case ICE_FELICIDADES_4:
+                block = Assets.getIce_felicidades_4();
+                break;
+            case ICE_FELICIDADES_5:
+                block = Assets.getIce_felicidades_5();
                 break;
         }
     }
@@ -197,7 +227,17 @@ public class Block extends Rectangle{
         ICE_ROAD_VERTICAL, //d93cf0
         ICE_ROAD_LEFT_DOWN, //403578
         ICE_ROAD_UP_RIGHT_DOWN, //6c2940
-        EXIT_ICE //ff0000
+        EXIT_ICE, //ff0000
+        NORMAL_FELICIDADES_1, //57d957
+        NORMAL_FELICIDADES_2, //574057
+        NORMAL_FELICIDADES_3, //9a4057
+        NORMAL_FELICIDADES_4, //3540ba
+        NORMAL_FELICIDADES_5, //35eeba
+        ICE_FELICIDADES_1, //403578
+        ICE_FELICIDADES_2, //d93cf0
+        ICE_FELICIDADES_3, //135740
+        ICE_FELICIDADES_4, //d9680f
+        ICE_FELICIDADES_5 //bfca87
     }
 
     public static int getBlockSize() {

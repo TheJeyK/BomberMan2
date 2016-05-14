@@ -16,7 +16,7 @@ public class TileManager {
 
     public TileManager(World world) {
         this.world = world;
-        lm = new LightManager(blocks);
+        lm = new LightManager();
     }
 
     public void tick(double deltaTime) {

@@ -126,6 +126,31 @@ public class World {
                                     new Block(new Vector2F(x * Block.getBlockSize(),
                                             y * Block.getBlockSize()), Block.BlockType.INTER_WALL_1));
                             break;
+                        case 0x57d957:
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.NORMAL_FELICIDADES_1));
+                            break;
+                        case 0x574057:
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.NORMAL_FELICIDADES_2));
+                            break;
+                        case 0x9a4057:
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.NORMAL_FELICIDADES_3));
+                            break;
+                        case 0x3540ba:
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.NORMAL_FELICIDADES_4));
+                            break;
+                        case 0x35eeba:
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.NORMAL_FELICIDADES_5));
+                            break;
                         case 0x93d6bf:
                             TileManager.blocks.add(
                                     new Block(new Vector2F(x * Block.getBlockSize(),
@@ -141,6 +166,40 @@ public class World {
                                     new Block(new Vector2F(x * Block.getBlockSize(),
                                             y * Block.getBlockSize()), Block.BlockType.ICE_FLOOR_1));
                             break;
+                        case 0xff0000:
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.EXIT_ICE));
+                        case 0x403578:
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.ICE_FELICIDADES_1));
+                            break;
+                        case 0xd93cf0:
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.ICE_FELICIDADES_2));
+                            break;
+                        case 0x135740:
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.ICE_FELICIDADES_3));
+                            break;
+                        case 0xd9680f:
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.ICE_FELICIDADES_4));
+                            break;
+                        case 0xbfca87:
+                            TileManager.blocks.add(
+                                    new Block(new Vector2F(x * Block.getBlockSize(),
+                                            y * Block.getBlockSize()), Block.BlockType.ICE_FELICIDADES_5));
+                            break;
+
+
+
+
+                        /*
                         case 0xbfb4f8:
                             TileManager.blocks.add(
                                     new Block(new Vector2F(x * Block.getBlockSize(),
@@ -161,10 +220,7 @@ public class World {
                                     new Block(new Vector2F(x * Block.getBlockSize(),
                                             y * Block.getBlockSize()), Block.BlockType.ICE_ROAD_UP_RIGHT_DOWN));
                             break;
-                        case 0xff0000:
-                            TileManager.blocks.add(
-                                    new Block(new Vector2F(x * Block.getBlockSize(),
-                                            y * Block.getBlockSize()), Block.BlockType.EXIT_ICE));
+                        */
                     }
                 }
             }

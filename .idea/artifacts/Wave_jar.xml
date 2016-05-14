@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Wave:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Wave_jar</output-path>
+    <root id="archive" name="Wave.jar">
+      <element id="module-output" name="Wave" />
+      <element id="library" level="project" name="GameOperatingSystem" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../GameOperatingSystem/out/artifacts/GameOperatingSystem_jar/GameOperatingSystem.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

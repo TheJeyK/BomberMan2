@@ -50,6 +50,16 @@ public class Assets {
     private static BufferedImage ice_road_left_down;
     private static BufferedImage ice_road_up_right_down;
     private static BufferedImage exit_ice;
+    private static BufferedImage ice_felicidades_1;
+    private static BufferedImage ice_felicidades_2;
+    private static BufferedImage ice_felicidades_3;
+    private static BufferedImage ice_felicidades_4;
+    private static BufferedImage ice_felicidades_5;
+    private static BufferedImage normal_felicidades_1;
+    private static BufferedImage normal_felicidades_2;
+    private static BufferedImage normal_felicidades_3;
+    private static BufferedImage normal_felicidades_4;
+    private static BufferedImage normal_felicidades_5;
 
     public void init() {
         mouse.setSpriteSheet(loadImageFrom.LoadImageFrom(Main.class, "mouse_sprites.png"));
@@ -86,6 +96,12 @@ public class Assets {
         wall_1 = blocks.getTile(16, 0, 16, 16);
         roof_1 = blocks.getTile(32, 0, 16, 16);
         inter_wall_1 = blocks.getTile(48, 0, 16, 16);
+        normal_felicidades_1 = blocks.getTile(0, 16, 16, 16);
+        normal_felicidades_2 = blocks.getTile(16, 16, 16, 16);
+        normal_felicidades_3 = blocks.getTile(32, 16, 16, 16);
+        normal_felicidades_4 = blocks.getTile(48, 16, 16, 16);
+        normal_felicidades_5 = blocks.getTile(64, 16, 16, 16);
+
         ice_wall_1 = iceblocks.getTile(48, 16, 16, 16);
         ice_roof_1 = iceblocks.getTile(0, 0, 16, 16);
         ice_floor_1 = iceblocks.getTile(32, 16, 16, 16);
@@ -94,6 +110,11 @@ public class Assets {
         ice_road_left_down = iceblocks.getTile(48, 32, 16, 16);
         ice_road_up_right_down = iceblocks.getTile(16, 48, 16 ,16);
         exit_ice = iceblocks.getTile(16, 32, 16, 16);
+        ice_felicidades_1 = iceblocks.getTile(0, 96, 16, 16);
+        ice_felicidades_2 = iceblocks.getTile(16, 96, 16, 16);
+        ice_felicidades_3 = iceblocks.getTile(32, 96, 16, 16);
+        ice_felicidades_4 = iceblocks.getTile(48, 96, 16, 16);
+        ice_felicidades_5 = iceblocks.getTile(64, 96, 16, 16);
     }
 
     public static BufferedImage getButton_heldOver() {
@@ -152,6 +173,26 @@ public class Assets {
         return roof_1;
     }
 
+    public static BufferedImage getNormal_felicidades_1() {
+        return normal_felicidades_1;
+    }
+
+    public static BufferedImage getNormal_felicidades_2() {
+        return normal_felicidades_2;
+    }
+
+    public static BufferedImage getNormal_felicidades_3() {
+        return normal_felicidades_3;
+    }
+
+    public static BufferedImage getNormal_felicidades_4() {
+        return normal_felicidades_4;
+    }
+
+    public static BufferedImage getNormal_felicidades_5() {
+        return normal_felicidades_5;
+    }
+
     public static BufferedImage getInter_wall_1() {
         return inter_wall_1;
     }
@@ -194,5 +235,25 @@ public class Assets {
 
     public static BufferedImage getExit_ice() {
         return exit_ice;
+    }
+
+    public static BufferedImage getIce_felicidades_1() {
+        return ice_felicidades_1;
+    }
+
+    public static BufferedImage getIce_felicidades_2() {
+        return ice_felicidades_2;
+    }
+
+    public static BufferedImage getIce_felicidades_3() {
+        return ice_felicidades_3;
+    }
+
+    public static BufferedImage getIce_felicidades_4() {
+        return ice_felicidades_4;
+    }
+
+    public static BufferedImage getIce_felicidades_5() {
+        return ice_felicidades_5;
     }
 }
